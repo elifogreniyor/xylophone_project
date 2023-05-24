@@ -1,94 +1,45 @@
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:english_words/english_words.dart';
 
 void main() => runApp(XylophoneApp());
 
 class XylophoneApp extends StatelessWidget {
   @override
+  void playSound(int soundNumber){ 
+    var player = AudioPlayer();
+    player.play(AssetSource('note$soundNumber.wav'));
+}
+  Expanded buildKey({Color? color, int? soundNumber}){
+    return Expanded(
+      child: TextButton(
+        style: ButtonStyle(backgroundColor: MaterialStateProperty.all(color)),
+          onPressed: (){
+            playSound(soundNumber!); 
+            },
+            child: Text(''),
+          ),
+        );
+  }
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Colors.black,
         body: SafeArea(
-          child: Column(
-            children: <Widget> [
-                TextButton(
-                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.red)),
-                  onPressed: (){
-                    var player = AudioPlayer();
-                    player.play(AssetSource('note1.wav'));  
-                  },
-                  child: Text(''),
-                  ),
-                TextButton(
-                  style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all<Color>(Colors.orange),
-                  ),
-                  onPressed: (){
-                    var player = AudioPlayer();
-                    player.play(AssetSource('note2.wav'));
-                    
-                  },
-                  child: Text(''),
-                  ),
-                TextButton(
-                  style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all<Color>(Colors.yellow),
-                  ),
-                  onPressed: (){
-                    var player = AudioPlayer();
-                    player.play(AssetSource('note3.wav'));
-                    
-                  },
-                  child: Text(''),
-                  ),
-                TextButton(
-                  style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all<Color>(Colors.green),
-                  ),
-                  onPressed: (){
-                    var player = AudioPlayer();
-                    player.play(AssetSource('note4.wav'));
-                    
-                  },
-                  child: Text(''),
-                  ),
-                TextButton(
-                  style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all<Color>(Colors.teal),
-                  ),
-                  onPressed: (){
-                    var player = AudioPlayer();
-                    player.play(AssetSource('note5.wav'));
-                    
-                  },
-                  child: Text(''),
-                  ),
-                TextButton(
-                  style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-                  ),
-                  onPressed: (){
-                    var player = AudioPlayer();
-                    player.play(AssetSource('note6.wav'));
-                    
-                  },
-                  child: Text(''),
-                  ),
-                TextButton(
-                  style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all<Color>(Colors.purple),
-                  ),
-                  onPressed: (){
-                    var player = AudioPlayer();
-                    player.play(AssetSource('note7.wav'));
-                    
-                  },
-                  child: Text(''),
-                  ),
-              ] 
-              ),
+          child: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget> [
+                buildKey(color: Colors.red, soundNumber: 1),
+                buildKey(color: Colors.orange, soundNumber: 2),
+                buildKey(color: Colors.yellow, soundNumber: 3),
+                buildKey(color: Colors.green, soundNumber: 4),
+                buildKey(color: Colors.teal, soundNumber: 5),
+                buildKey(color: Colors.blue, soundNumber: 6),
+                buildKey(color: Colors.purple, soundNumber: 7),
+                ] 
+                ),
+          ),
           ),
         ),
       );
